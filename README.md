@@ -9,7 +9,7 @@ Bu proje, bir otel işletmesinin rezervasyon, konaklama, ödeme ve personel sür
 ## Kullanılan Teknolojiler
 *   **Backend:** Java Spring Boot
 *   **Veritabanı:** MySQL
-*   **Diğer Araçlar:** Docker, İyzico (Ödeme Entegrasyonu Testi)
+
 
 ## Veritabanı Mimarisi (ER Diyagramı)
 Aşağıdaki şema, sistemde kullanılacak temel 13 tabloyu ve aralarındaki ilişkileri göstermektedir:
