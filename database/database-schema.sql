@@ -10,7 +10,7 @@ CREATE TABLE Kullanici (
     rol ENUM('misafir', 'resepsiyon', 'yonetici') NOT NULL
 );
 
--- 3. Misafir Tablosu[cite: 1]
+-- 3. Misafir Tablosu
 CREATE TABLE Misafir (
     id INT AUTO_INCREMENT PRIMARY KEY,
     kullanici_id INT UNIQUE,
@@ -23,7 +23,7 @@ CREATE TABLE Misafir (
     FOREIGN KEY (kullanici_id) REFERENCES Kullanici(id) ON DELETE CASCADE
 );
 
--- 4. Personel Tablosu[cite: 1]
+-- 4. Personel Tablosu
 CREATE TABLE Personel (
     id INT AUTO_INCREMENT PRIMARY KEY,
     kullanici_id INT UNIQUE,
@@ -34,7 +34,7 @@ CREATE TABLE Personel (
     FOREIGN KEY (kullanici_id) REFERENCES Kullanici(id) ON DELETE CASCADE
 );
 
--- 5. Oda Tipi Tablosu[cite: 1]
+-- 5. Oda Tipi Tablosu
 CREATE TABLE OdaTipi (
     id INT AUTO_INCREMENT PRIMARY KEY,
     tip_adi VARCHAR(50) NOT NULL, -- standart, deluxe, suit vb.
@@ -43,7 +43,7 @@ CREATE TABLE OdaTipi (
     temel_fiyat DECIMAL(10,2) NOT NULL
 );
 
--- 6. Oda Tablosu[cite: 1]
+-- 6. Oda Tablosu
 CREATE TABLE Oda (
     id INT AUTO_INCREMENT PRIMARY KEY,
     oda_numarasi INT NOT NULL UNIQUE,
@@ -53,7 +53,7 @@ CREATE TABLE Oda (
     FOREIGN KEY (oda_tipi_id) REFERENCES OdaTipi(id)
 );
 
--- 7. Sezon Fiyatı Tablosu[cite: 1]
+-- 7. Sezon Fiyatı Tablosu
 CREATE TABLE SezonFiyati (
     id INT AUTO_INCREMENT PRIMARY KEY,
     oda_tipi_id INT NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE SezonFiyati (
     FOREIGN KEY (oda_tipi_id) REFERENCES OdaTipi(id)
 );
 
--- 8. Rezervasyon Tablosu[cite: 1]
+-- 8. Rezervasyon Tablosu
 CREATE TABLE Rezervasyon (
     id INT AUTO_INCREMENT PRIMARY KEY,
     misafir_id INT NOT NULL,
@@ -77,7 +77,7 @@ CREATE TABLE Rezervasyon (
     FOREIGN KEY (oda_id) REFERENCES Oda(id)
 );
 
--- 9. Konaklama Tablosu[cite: 1]
+-- 9. Konaklama Tablosu
 CREATE TABLE Konaklama (
     id INT AUTO_INCREMENT PRIMARY KEY,
     rezervasyon_id INT NOT NULL UNIQUE,
@@ -88,14 +88,14 @@ CREATE TABLE Konaklama (
     FOREIGN KEY (islem_yapan_personel_id) REFERENCES Personel(id)
 );
 
--- 10. Ek Hizmet Tablosu[cite: 1]
+-- 10. Ek Hizmet Tablosu
 CREATE TABLE EkHizmet (
     id INT AUTO_INCREMENT PRIMARY KEY,
     hizmet_adi VARCHAR(100) NOT NULL,
     birim_fiyat DECIMAL(10,2) NOT NULL
 );
 
--- 11. Konaklama Hizmeti Tablosu (Ara Tablo)[cite: 1]
+-- 11. Konaklama Hizmeti Tablosu (Ara Tablo)
 CREATE TABLE KonaklamaHizmeti (
     id INT AUTO_INCREMENT PRIMARY KEY,
     konaklama_id INT NOT NULL,
@@ -106,7 +106,7 @@ CREATE TABLE KonaklamaHizmeti (
     FOREIGN KEY (ek_hizmet_id) REFERENCES EkHizmet(id)
 );
 
--- 12. Ödeme Tablosu[cite: 1]
+-- 12. Ödeme Tablosu
 CREATE TABLE Odeme (
     id INT AUTO_INCREMENT PRIMARY KEY,
     konaklama_id INT NOT NULL,
@@ -116,7 +116,7 @@ CREATE TABLE Odeme (
     FOREIGN KEY (konaklama_id) REFERENCES Konaklama(id)
 );
 
--- 13. Temizlik Kaydı Tablosu[cite: 1]
+-- 13. Temizlik Kaydı Tablosu
 CREATE TABLE TemizlikKaydi (
     id INT AUTO_INCREMENT PRIMARY KEY,
     oda_id INT NOT NULL,
@@ -127,7 +127,7 @@ CREATE TABLE TemizlikKaydi (
     FOREIGN KEY (personel_id) REFERENCES Personel(id)
 );
 
--- 14. İşlem Log Tablosu (Trigger'lar için hazır altyapı)[cite: 1]
+-- 14. İşlem Log Tablosu (Trigger'lar için hazır altyapı)
 CREATE TABLE IslemLog (
     id INT AUTO_INCREMENT PRIMARY KEY,
     tablo_adi VARCHAR(50) NOT NULL,
